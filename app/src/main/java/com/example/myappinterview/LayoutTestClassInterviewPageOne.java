@@ -16,16 +16,10 @@ public class LayoutTestClassInterviewPageOne extends AppCompatActivity {
 	bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 	  switch (item.getItemId()) {
 		case R.id.page_1:
-//		  Toast.makeText(LayoutTestClassInterviewPageOne.this, "Page1", Toast.LENGTH_SHORT).show();
 		  startActivity(new Intent(this, MainActivity.class));
 		  break;
 		case R.id.page_2:
-//		  Toast.makeText(LayoutTestClassInterviewPageOne.this, "Page2", Toast.LENGTH_SHORT).show();
 		  startActivity(new Intent(this, DisplayMessageActivity.class));
-		  break;
-		case R.id.page_3:
-//		  Toast.makeText(LayoutTestClassInterviewPageOne.this, "Page3", Toast.LENGTH_SHORT).show();
-		  startActivity(new Intent(this, LayoutTestClassInterviewPageOne.class));
 		  break;
 	  }
 	  return true;
