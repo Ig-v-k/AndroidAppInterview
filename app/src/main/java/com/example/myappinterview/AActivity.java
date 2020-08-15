@@ -1,6 +1,5 @@
 package com.example.myappinterview;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,16 +14,14 @@ public class AActivity extends AppCompatActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_a);
 
-
-	// Setting a PageOneFragment by fist page
+	// Setting a 'Fragment' - PageOneFragment, by fist page
 	getSupportFragmentManager()
 		  .beginTransaction()
-		  .replace(R.id.fragment_layout, new PageOneFragment())
+		  .replace(R.id.fragment_layout, new PageTwoFragment())
 		  .commit();
 
 	// Bottom navigation
 	BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-
 	// Listener Bottom navigation
 	bottomNav.setOnNavigationItemSelectedListener(item -> {
 	  androidx.fragment.app.Fragment fragment = null;

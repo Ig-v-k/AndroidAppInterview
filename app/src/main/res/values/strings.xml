@@ -2,17 +2,27 @@
     <string name="app_name">My AppInterview</string>
     <string name="layoutTestTextTextView">Hello, I am a TextView</string>
     <string name="layoutTestTextButton">Hello, I am a Button</string>
-    <string name="text_label_1">Page1</string>
-    <string name="text_label_2">Page2</string>
+    <string name="text_label_1">Add</string>
+    <string name="text_label_2">Home</string>
     <string name="text_label_3">Page3</string>
     <string name="menu_search">search</string>
     <string name="menu_settings">settings</string>
     <string name="menu_navigation">nav</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="AAEditTextName_hint">Name</string>
     <string name="AAEditTextView_text">Employeer</string>
     <string name="AAEditTextName_hintTelephone">Telephone nr.</string>
     <string name="AAEditTextName_hintAge">Age</string>
-    <string name="AAButton_text">Button</string>
+    <string name="AAButton_text">Add</string>
+    <string name="ActivityDisplayMessageTextview">TextView</string>
+    <string name="shr_hint_username">Username</string>
+    <string name="shr_hint_password">Password</string>
+    <string name="shr_app_name">Login</string>
+    <string name="shr_employee_title">Title</string>
+    <string name="shr_employee_description">description</string>
+    <string name="search">Search</string>
+    <string name="content_description_search">Description</string>
+    <string name="more">More</string>
+    <string name="content_description_more">Description</string>
+    <string name="fab_content_desc">desc</string>
 </resources>
