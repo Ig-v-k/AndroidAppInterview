@@ -1,17 +1,21 @@
 package com.example.myappinterview;
 
-import android.os.Build;
+import java.io.Serializable;
 
-import java.util.Objects;
-
-public class Employee {
+public class Employee implements Serializable {
   private String nameEmp;
   private String telNum;
+  private String sex;
   private int age;
 
-  public Employee(String nameEmp, String telNum, int age) {
+  public Employee(String nameEmp) {
+    this.nameEmp = nameEmp;
+  }
+
+  public Employee(String nameEmp, String telNum, String sex, int age) {
     this.nameEmp = nameEmp;
     this.telNum = telNum;
+    this.sex = sex;
     this.age = age;
   }
 
@@ -31,6 +35,14 @@ public class Employee {
     this.telNum = telNum;
   }
 
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
   public int getAge() {
     return age;
   }
@@ -38,35 +50,4 @@ public class Employee {
   public void setAge(int age) {
     this.age = age;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Employee employee = (Employee) o;
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      return age == employee.age &&
-            Objects.equals(nameEmp, employee.nameEmp) &&
-            Objects.equals(telNum, employee.telNum);
-    }
-    return false;
-  }
-
-  @Override
-  public int hashCode() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      return Objects.hash(nameEmp, telNum, age);
-    }
-    return 0;
-  }
-
-  @Override
-  public String toString() {
-    return "Employee{" +
-          "nameEmp='" + nameEmp + '\'' +
-          ", telNum='" + telNum + '\'' +
-          ", age=" + age +
-          '}';
-  }
-
 }
