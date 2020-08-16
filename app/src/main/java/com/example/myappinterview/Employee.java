@@ -8,10 +8,6 @@ public class Employee implements Serializable {
   private String sex;
   private int age;
 
-  public Employee(String nameEmp) {
-    this.nameEmp = nameEmp;
-  }
-
   public Employee(String nameEmp, String telNum, String sex, int age) {
     this.nameEmp = nameEmp;
     this.telNum = telNum;

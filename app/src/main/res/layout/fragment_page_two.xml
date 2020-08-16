@@ -36,6 +36,7 @@
 <!--</FrameLayout>-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -58,7 +59,8 @@
                     android:text="@string/staff"
                     android:textColor="@color/custom_black"
                     android:textSize="30sp"
-                    android:gravity="center" android:textStyle="bold"/>
+                    android:gravity="center"
+                    android:textStyle="bold"/>
 
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
