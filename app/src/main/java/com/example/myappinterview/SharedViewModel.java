@@ -10,4 +10,8 @@ public class SharedViewModel extends ViewModel {
     selected.setValue(employee);
   }
 
+  public MutableLiveData<Employee> getSelected() {
+    return selected;
+  }
+
 }

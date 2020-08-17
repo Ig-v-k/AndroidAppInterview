@@ -33,25 +33,27 @@ public class PageOneFragment extends Fragment {
 	Button buttonAdd = view.findViewById(R.id.buttonAdd);
 
 	buttonAdd.setOnClickListener(view1 -> {
-	  if(checkBoxMale.isChecked()) {
-		EmployeeDataBase.addEmployee(
-			  new Employee(
-					editTextName.getText().toString(),
-				  editTextTelephone.getText().toString(),
-				  "Male",
-				  Integer.parseInt(editTextAge.getText().toString())
-			)
-		);
-	  }
-	  if(checkBoxFemale.isChecked()) {
-		EmployeeDataBase.addEmployee(
-			  new Employee(
-					editTextName.getText().toString(),
-				  editTextTelephone.getText().toString(),
-				  "Female",
-				  Integer.parseInt(editTextAge.getText().toString())
-			)
-		);
+	  if("".equals(editTextAge.getText().toString()) || "".equals(editTextTelephone.getText().toString()) || "".equals(editTextName.getText().toString())) {
+		if(checkBoxMale.isChecked()) {
+		  EmployeeDataBase.addEmployee(
+				new Employee(
+					  editTextName.getText().toString(),
+					  editTextTelephone.getText().toString(),
+					  "Male",
+					  Integer.parseInt(editTextAge.getText().toString())
+				)
+		  );
+		}
+		if(checkBoxFemale.isChecked()) {
+		  EmployeeDataBase.addEmployee(
+				new Employee(
+					  editTextName.getText().toString(),
+					  editTextTelephone.getText().toString(),
+					  "Female",
+					  Integer.parseInt(editTextAge.getText().toString())
+				)
+		  );
+		}
 	  }
 	});
 

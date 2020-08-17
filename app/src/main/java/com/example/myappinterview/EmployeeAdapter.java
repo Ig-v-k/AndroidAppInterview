@@ -1,44 +1,29 @@
 package com.example.myappinterview;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
-import static com.example.myappinterview.R.id.*;
+import java.util.List;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> {
 
-  FragmentTransaction fragmentTransaction;
-  OnItemClickListener listener;
+  List<Employee> employeeList;
 
-  public EmployeeAdapter(FragmentTransaction fragmentTransaction) {
-	this.fragmentTransaction = fragmentTransaction;
-  }
-
-  public interface OnItemClickListener {
-    void onClick(View view, int position);
-  }
-
-  public void setListener(OnItemClickListener listener) {
-	this.listener = listener;
+  public EmployeeAdapter(List<Employee> employeeList) {
+	this.employeeList = employeeList;
   }
 
   @NonNull
   @NotNull
   @Override
-  public EmployeeAdapter.ViewHolder onCreateViewHolder(
-		@NonNull
-		@NotNull ViewGroup parent, int viewType) {
-
+  public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 	View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_staff_second, parent, false);
 	return new ViewHolder(view);
   }
@@ -48,8 +33,22 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 		@NonNull
 		@NotNull EmployeeAdapter.ViewHolder holder, int position) {
 
-	holder.fragmentTransaction = this.fragmentTransaction;
-	holder.bindView(position);
+    Employee employee = employeeList.get(position);
+
+	holder.imageView.setImageResource(R.drawable.man);
+	holder.nameEmployee.setText(employee.getNameEmp());
+	holder.telephoneEmployee.setText(employee.getTelNum());
+
+	holder.itemView.setOnClickListener(view -> {
+	  Intent intent = new Intent(view.getContext(), DisplayMessageActivity.class);
+
+	  intent.putExtra("dataName", employee.getNameEmp());
+	  intent.putExtra("dataTelephone", employee.getTelNum());
+	  intent.putExtra("dataAge", String.valueOf(employee.getAge()));
+	  intent.putExtra("dataSex", employee.getSex());
+
+	  view.getContext().startActivity(intent);
+	});
   }
 
   @Override
@@ -60,43 +59,17 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
   /**
    * Inner Class
    */
-  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+  class ViewHolder extends RecyclerView.ViewHolder {
 
-	FragmentTransaction fragmentTransaction;
 	TextView nameEmployee, telephoneEmployee;
-	CardView cardView;
 	ImageView imageView;
-	Employee employee;
 
 	public ViewHolder(@NonNull @NotNull View itemView) {
 	  super(itemView);
 
-	  this.imageView = itemView.findViewById(RVCVImage);
-	  this.nameEmployee = itemView.findViewById(RVCVName);
-	  this.telephoneEmployee = itemView.findViewById(RVCVTelephone);
-	  this.cardView = itemView.findViewById(mainCardViewEmployee);
-
-	  itemView.setOnClickListener(this);
-	}
-
-	public void bindView(int position) {
-	  employee = EmployeeDataBase.getAll().get(position);
-
-	  imageView.setImageResource(R.drawable.man);
-	  nameEmployee.setText(employee.getNameEmp());
-	  telephoneEmployee.setText(employee.getTelNum());
-	}
-
-	@Override
-	public void onClick(View view) {
-	  Bundle bundle = new Bundle();
-	  bundle.putString("dataName", employee.getNameEmp());
-	  bundle.putString("dataTelephone", employee.getTelNum());
-	  bundle.putString("dataAge", String.valueOf(employee.getAge()));
-	  bundle.putString("dataSex", employee.getSex());
-
-	  listener.onClick(view, getAdapterPosition());
-
+	  this.imageView = itemView.findViewById(R.id.RVCVImage);
+	  this.nameEmployee = itemView.findViewById(R.id.RVCVName);
+	  this.telephoneEmployee = itemView.findViewById(R.id.RVCVTelephone);
 	}
   }
 }

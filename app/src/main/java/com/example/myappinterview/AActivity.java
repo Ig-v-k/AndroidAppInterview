@@ -40,6 +40,5 @@ public class AActivity extends AppCompatActivity {
 			.commit();
 	  return true;
 	});
-
   }// m:onCreate
 }// c:AActivity

@@ -1,57 +1,50 @@
 package com.example.myappinterview;
 
 import android.os.Bundle;
-import android.widget.ImageView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FragmentPageTwoSecond extends Fragment {
 
-    RecyclerView recyclerView;
-    View view;
-    EmployeeAdapter employeeAdapter;
+  RecyclerView recyclerView;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+  EmployeeAdapter adapter;
+  SharedViewModel sharedViewModel;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+  }
 
-        view = inflater.inflate(R.layout.fragment_page_two_second, container, false);
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	View view = inflater.inflate(R.layout.fragment_page_two_second, container, false);
+	androidx.fragment.app.Fragment fragment = new PageOneFragment();
 
-        recyclerView = view.findViewById(R.id.recyclerViewSecond);
+	FloatingActionButton fab = view.findViewById(R.id.floating_action_button);
+	fab.setOnClickListener(view1 ->
+		  getParentFragmentManager().beginTransaction().replace(R.id.placeholder, fragment).commit()
+	);
 
+	recyclerView = view.findViewById(R.id.recyclerViewSecond);
+	EmployeeAdapter adapter = new EmployeeAdapter(EmployeeDataBase.getAll());
+	recyclerView.setAdapter(adapter);
+	recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        FragmentPageInformationEmployee informationEmployee = new FragmentPageInformationEmployee();
-        informationEmployee.setArguments(bundle);
-
-        fragmentTransaction.replace(R.id.fragment_information_employee, informationEmployee);
-        fragmentTransaction.commit();
-
-
-        employeeAdapter = new EmployeeAdapter(fragmentTransaction);
-        recyclerView.setAdapter(employeeAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-
-        return view;
-    }
+	return view;
+  }
 }
