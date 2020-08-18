@@ -1,7 +1,10 @@
-package com.example.myappinterview;
+package com.example.myappinterview.model;
 
 import java.io.Serializable;
 
+/**
+*  A Model of the Employee
+*/
 public class Employee implements Serializable {
   private String nameEmp;
   private String telNum;

@@ -1,30 +1,23 @@
-package com.example.myappinterview;
+package com.example.myappinterview.fragments;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.myappinterview.AActivity;
+import com.example.myappinterview.adapter.EmployeeAdapter;
+import com.example.myappinterview.db.EmployeeDataBase;
+import com.example.myappinterview.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
-
-public class FragmentPageTwoSecond extends Fragment {
+/**
+ *  Class realise a Fragment view - fragment_page_two_home.xml
+ */
+public class FragmentPageTwoHome extends Fragment {
 
   RecyclerView recyclerView;
   Intent intent;
@@ -36,7 +29,7 @@ public class FragmentPageTwoSecond extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	View view = inflater.inflate(R.layout.fragment_page_two_second, container, false);
+	View view = inflater.inflate(R.layout.fragment_page_two_home, container, false);
 
 	FloatingActionButton fab = view.findViewById(R.id.floating_action_button);
 	fab.setOnClickListener(view1 -> {

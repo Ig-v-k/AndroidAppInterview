@@ -1,8 +1,13 @@
-package com.example.myappinterview;
+package com.example.myappinterview.db;
+
+import com.example.myappinterview.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+*  Database by locally (for a test's)
+*/
 public class EmployeeDataBase {
   static private final List<Employee> employeeList = new ArrayList<>(0);
 

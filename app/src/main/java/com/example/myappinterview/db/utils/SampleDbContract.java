@@ -1,7 +1,10 @@
-package com.example.myappinterview;
+package com.example.myappinterview.db.utils;
 
 import android.provider.BaseColumns;
 
+/**
+* A DataBase Table configuration
+*/
 public final class SampleDbContract {
   private SampleDbContract() { }
 

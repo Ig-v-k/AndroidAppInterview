@@ -5,7 +5,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DisplayMessageActivity extends AppCompatActivity {
+/**
+ * Class display all(Name; Telephone; Age; Sex) information of the Employee
+ */
+public class DisplayEmployeeInformation extends AppCompatActivity {
 
   ImageView imageViewAvatar;
   TextView textViewName, textViewTelephone, textViewAge, textViewSex;
@@ -24,6 +27,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
 	this.setData();
   }
 
+  /*
+  * init data to item view's
+  */
   private void setData() {
 	imageViewAvatar.setImageResource(R.drawable.man);
 	textViewName.setText(getIntent().getStringExtra("dataName"));

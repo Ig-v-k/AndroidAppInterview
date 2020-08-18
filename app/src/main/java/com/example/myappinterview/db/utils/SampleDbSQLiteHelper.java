@@ -1,9 +1,12 @@
-package com.example.myappinterview;
+package com.example.myappinterview.db.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ *  Generally DataBase configuration
+ */
 public class SampleDbSQLiteHelper extends SQLiteOpenHelper {
 
   private static final int DATABASE_VERSION = 1;

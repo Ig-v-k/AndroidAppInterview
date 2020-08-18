@@ -1,4 +1,4 @@
-package com.example.myappinterview;
+package com.example.myappinterview.fragments;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,11 +11,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.example.myappinterview.*;
+import com.example.myappinterview.db.EmployeeDataBase;
+import com.example.myappinterview.db.utils.SampleDbContract;
+import com.example.myappinterview.db.utils.SampleDbSQLiteHelper;
+import com.example.myappinterview.model.Employee;
 
-import java.util.Calendar;
-
-public class PageOneFragment extends Fragment {
+/**
+ *  Class realise a Fragment view - fragment_page_one_add.xml
+ */
+public class FragmentPageOneAdd extends Fragment {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,7 @@ public class PageOneFragment extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	View view = inflater.inflate(R.layout.fragment_page_one, container, false);
+	View view = inflater.inflate(R.layout.fragment_page_one_add, container, false);
 
 	/**
 	 *  Instance Data's
