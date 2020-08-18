@@ -1,5 +1,7 @@
 package com.example.myappinterview;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Calendar;
 
 public class PageOneFragment extends Fragment {
 
@@ -33,30 +37,44 @@ public class PageOneFragment extends Fragment {
 	Button buttonAdd = view.findViewById(R.id.buttonAdd);
 
 	buttonAdd.setOnClickListener(view1 -> {
-	  if("".equals(editTextAge.getText().toString()) || "".equals(editTextTelephone.getText().toString()) || "".equals(editTextName.getText().toString())) {
-		if(checkBoxMale.isChecked()) {
-		  EmployeeDataBase.addEmployee(
-				new Employee(
-					  editTextName.getText().toString(),
-					  editTextTelephone.getText().toString(),
-					  "Male",
-					  Integer.parseInt(editTextAge.getText().toString())
-				)
-		  );
-		}
-		if(checkBoxFemale.isChecked()) {
-		  EmployeeDataBase.addEmployee(
-				new Employee(
-					  editTextName.getText().toString(),
-					  editTextTelephone.getText().toString(),
-					  "Female",
-					  Integer.parseInt(editTextAge.getText().toString())
-				)
-		  );
-		}
+//	  if("".equals(editTextAge.getText().toString()) || "".equals(editTextTelephone.getText().toString()) || "".equals(editTextName.getText().toString())) {
+	  if (checkBoxMale.isChecked()) {
+		EmployeeDataBase.addEmployee(
+			  new Employee(
+					editTextName.getText().toString(),
+					editTextTelephone.getText().toString(),
+					"Male",
+					Integer.parseInt(editTextAge.getText().toString())
+			  )
+		);
+		this.saveToDb(view, editTextName, editTextTelephone, editTextAge, "Male");
 	  }
+	  if (checkBoxFemale.isChecked()) {
+		EmployeeDataBase.addEmployee(
+			  new Employee(
+					editTextName.getText().toString(),
+					editTextTelephone.getText().toString(),
+					"Female",
+					Integer.parseInt(editTextAge.getText().toString())
+			  )
+		);
+		this.saveToDb(view, editTextName, editTextTelephone, editTextAge, "Female");
+	  }
+//	  }
 	});
 
 	return view;
   }
+
+  private void saveToDb(View view, EditText editTextName, EditText editTextTelephone, EditText editTextAge, String sex) {
+	SQLiteDatabase database = new SampleDbSQLiteHelper(view.getContext()).getWritableDatabase();
+	ContentValues values = new ContentValues();
+	values.put(SampleDbContract.EmployeeDb.COLUMN_NAME, editTextName.getText().toString());
+	values.put(SampleDbContract.EmployeeDb.COLUMN_TELEPHONE, editTextTelephone.getText().toString());
+	values.put(SampleDbContract.EmployeeDb.COLUMN_AGE, editTextAge.getText().toString());
+	values.put(SampleDbContract.EmployeeDb.COLUMN_SEX, sex);
+	long newRowId = database.insert(SampleDbContract.EmployeeDb.TABLE_NAME, null, values);
+	Toast.makeText(view.getContext(), "The new Employee is " + newRowId, Toast.LENGTH_LONG).show();
+  }
+
 }

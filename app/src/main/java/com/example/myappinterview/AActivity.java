@@ -17,7 +17,7 @@ public class AActivity extends AppCompatActivity {
 	// Setting a 'Fragment' - PageOneFragment, by fist page
 	getSupportFragmentManager()
 		  .beginTransaction()
-		  .replace(R.id.aactivity_frame_layout, new FragmentPageTwoSecond())
+		  .replace(R.id.aactivity_frame_layout, new PageOneFragment())
 		  .commit();
 
 	// Bottom navigation

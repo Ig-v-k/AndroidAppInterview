@@ -1,6 +1,10 @@
 package com.example.myappinterview;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +22,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 public class FragmentPageTwoSecond extends Fragment {
 
   RecyclerView recyclerView;
-
-  EmployeeAdapter adapter;
-  SharedViewModel sharedViewModel;
+  Intent intent;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -33,15 +37,15 @@ public class FragmentPageTwoSecond extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	View view = inflater.inflate(R.layout.fragment_page_two_second, container, false);
-	androidx.fragment.app.Fragment fragment = new PageOneFragment();
 
 	FloatingActionButton fab = view.findViewById(R.id.floating_action_button);
-	fab.setOnClickListener(view1 ->
-		  getParentFragmentManager().beginTransaction().replace(R.id.placeholder, fragment).commit()
-	);
+	fab.setOnClickListener(view1 -> {
+	  intent = new Intent(view.getContext(), AActivity.class);
+	  view.getContext().startActivity(intent);
+	});
 
 	recyclerView = view.findViewById(R.id.recyclerViewSecond);
-	EmployeeAdapter adapter = new EmployeeAdapter(EmployeeDataBase.getAll());
+	EmployeeAdapter adapter = new EmployeeAdapter(EmployeeDataBase.getAll(), view.getContext());
 	recyclerView.setAdapter(adapter);
 	recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
