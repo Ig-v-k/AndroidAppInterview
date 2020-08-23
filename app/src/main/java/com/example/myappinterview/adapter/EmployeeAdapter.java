@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -49,11 +50,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 		@NonNull
 		@NotNull EmployeeAdapter.ViewHolder holder, int position) {
 
-//    Employee employee = employeeList.get(position);
-
-//	holder.imageView.setImageResource(R.drawable.man);
-//	holder.nameEmployee.setText(employee.getNameEmp());
-//	holder.telephoneEmployee.setText(employee.getTelNum());
 	Cursor cursor = this.getFromDB(holder.itemView.getContext());
 
 	if (cursor.move(position + 1)) {
@@ -68,11 +64,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	holder.itemView.setOnClickListener(view -> {
 	  Intent intent = new Intent(view.getContext(), DisplayEmployeeInformation.class);
 
-//	  intent.putExtra("dataName", employee.getNameEmp());
-//	  intent.putExtra("dataTelephone", employee.getTelNum());
-//	  intent.putExtra("dataAge", String.valueOf(employee.getAge()));
-//	  intent.putExtra("dataSex", employee.getSex());
-
 	  intent.putExtra("dataName", cursor.getString(1));
 	  intent.putExtra("dataTelephone", cursor.getString(2));
 	  intent.putExtra("dataAge", String.valueOf(cursor.getString(3)));
@@ -80,17 +71,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
 	  view.getContext().startActivity(intent);
 	});
-//	cursor.close();
   }
 
   private Cursor getFromDB(Context context) {
 	SQLiteDatabase database = new SampleDbSQLiteHelper(context).getReadableDatabase();
-//	String query = "Select * FROM "	+ SampleDbContract.EmployeeDb.CREATE_TABLE + " WHERE " + SampleDbContract.EmployeeDb.COLUMN_NAME + " = " + data;
-//	String[] projection = {
-//		  SampleDbContract.EmployeeDb._ID,
-//		  SampleDbContract.EmployeeDb.COLUMN_NAME,
-//		  SampleDbContract.EmployeeDb.COLUMN_TELEPHONE
-//	};
 	return database.query(
 		  SampleDbContract.EmployeeDb.TABLE_NAME,
 		  null,
@@ -102,18 +86,25 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	);
   }
 
+  private void deleteFromDb(Context context, String... args) {
+	SQLiteDatabase database = new SampleDbSQLiteHelper(context).getReadableDatabase();
+	database.delete(SampleDbContract.EmployeeDb.TABLE_NAME, SampleDbContract.EmployeeDb.COLUMN_TELEPHONE + "=?", args);
+  }
+
   @Override
   public int getItemCount() {
 	return getFromDB(context).getCount();
   }
 
+
   /**
    * Inner Class
    */
-  class ViewHolder extends RecyclerView.ViewHolder {
+  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-	TextView nameEmployee, telephoneEmployee;
 	ImageView imageView;
+	TextView nameEmployee, telephoneEmployee;
+	ImageButton imageButtonDelete, imageButtonEdit;
 
 	public ViewHolder(@NonNull @NotNull View itemView) {
 	  super(itemView);
@@ -121,6 +112,16 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	  this.imageView = itemView.findViewById(R.id.RVCVImage);
 	  this.nameEmployee = itemView.findViewById(R.id.RVCVName);
 	  this.telephoneEmployee = itemView.findViewById(R.id.RVCVTelephone);
+	  this.imageButtonDelete = itemView.findViewById(R.id.RVCVDelete);
+	  this.imageButtonEdit = itemView.findViewById(R.id.RVCVEdit);
+	}
+
+	@Override
+	public void onClick(View view) {
+	  if(view.equals(imageButtonDelete)) {
+		System.out.println("onClick() ---------------------------------->");
+	    deleteFromDb(itemView.getContext(), telephoneEmployee.getText().toString());
+	  }
 	}
   }
 }
