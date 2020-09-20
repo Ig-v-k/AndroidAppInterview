@@ -1,5 +1,6 @@
 package com.example.myappinterview.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myappinterview.DisplayEmployeeInformation;
@@ -46,11 +48,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
   }
 
   @Override
-  public void onBindViewHolder(
-		@NonNull
-		@NotNull EmployeeAdapter.ViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull @NotNull EmployeeAdapter.ViewHolder holder, int position) {
 
 	Cursor cursor = this.getFromDB(holder.itemView.getContext());
+
+	holder.imageButtonDelete.setOnClickListener(view -> {
+	  deleteFromDb(context, position, holder.telephoneEmployee.getText().toString());
+	  notifyItemRemoved(position);
+	});
 
 	if (cursor.move(position + 1)) {
 	  int name = cursor.getColumnIndex(SampleDbContract.EmployeeDb.COLUMN_NAME);
@@ -69,6 +74,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	  intent.putExtra("dataAge", String.valueOf(cursor.getString(3)));
 	  intent.putExtra("dataSex", cursor.getString(4));
 
+	  cursor.close();
 	  view.getContext().startActivity(intent);
 	});
   }
@@ -86,9 +92,11 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	);
   }
 
-  private void deleteFromDb(Context context, String... args) {
+  private void deleteFromDb(Context context, int position, String... args) {
 	SQLiteDatabase database = new SampleDbSQLiteHelper(context).getReadableDatabase();
 	database.delete(SampleDbContract.EmployeeDb.TABLE_NAME, SampleDbContract.EmployeeDb.COLUMN_TELEPHONE + "=?", args);
+	Toast.makeText(context, "The Employee " + position + 1 + " has been delete", Toast.LENGTH_LONG).show();
+	database.close();
   }
 
   @Override
@@ -100,7 +108,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
   /**
    * Inner Class
    */
-  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+  static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 	ImageView imageView;
 	TextView nameEmployee, telephoneEmployee;
@@ -118,10 +126,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
 	@Override
 	public void onClick(View view) {
-	  if(view.equals(imageButtonDelete)) {
-		System.out.println("onClick() ---------------------------------->");
-	    deleteFromDb(itemView.getContext(), telephoneEmployee.getText().toString());
-	  }
 	}
   }
 }

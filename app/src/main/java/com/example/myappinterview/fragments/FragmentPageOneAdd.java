@@ -80,6 +80,7 @@ public class FragmentPageOneAdd extends Fragment {
 	values.put(SampleDbContract.EmployeeDb.COLUMN_SEX, sex);
 	long newRowId = database.insert(SampleDbContract.EmployeeDb.TABLE_NAME, null, values);
 	Toast.makeText(view.getContext(), "The new Employee is " + newRowId, Toast.LENGTH_LONG).show();
+	database.close();
   }
 
 }
