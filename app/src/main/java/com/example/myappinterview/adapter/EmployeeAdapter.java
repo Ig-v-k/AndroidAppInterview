@@ -104,7 +104,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	return getFromDB(context).getCount();
   }
 
-
   /**
    * Inner Class
    */
