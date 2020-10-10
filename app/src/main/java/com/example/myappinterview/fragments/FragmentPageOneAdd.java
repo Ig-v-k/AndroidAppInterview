@@ -11,14 +11,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import com.example.myappinterview.*;
+import com.example.myappinterview.R;
 import com.example.myappinterview.db.EmployeeDataBase;
 import com.example.myappinterview.db.utils.SampleDbContract;
 import com.example.myappinterview.db.utils.SampleDbSQLiteHelper;
 import com.example.myappinterview.model.Employee;
 
 /**
- *  Class realise a Fragment view - fragment_page_one_add.xml
+ * Class realise a Fragment view - fragment_page_one_add.xml
  */
 public class FragmentPageOneAdd extends Fragment {
 
@@ -42,7 +42,6 @@ public class FragmentPageOneAdd extends Fragment {
 	Button buttonAdd = view.findViewById(R.id.buttonAdd);
 
 	buttonAdd.setOnClickListener(view1 -> {
-//	  if("".equals(editTextAge.getText().toString()) || "".equals(editTextTelephone.getText().toString()) || "".equals(editTextName.getText().toString())) {
 	  if (checkBoxMale.isChecked()) {
 		EmployeeDataBase.addEmployee(
 			  new Employee(
@@ -65,7 +64,6 @@ public class FragmentPageOneAdd extends Fragment {
 		);
 		this.saveToDb(view, editTextName, editTextTelephone, editTextAge, "Female");
 	  }
-//	  }
 	});
 
 	return view;

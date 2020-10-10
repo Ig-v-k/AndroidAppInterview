@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="apk" name="My_AppInterview.app">
-    <output-path>$PROJECT_DIR$/build/classes/artifacts/My_AppInterview_app</output-path>
+  <artifact type="apk" name="android_projBooks.app">
+    <output-path>$PROJECT_DIR$/build/classes/artifacts/android_projBooks_app</output-path>
     <properties id="android-properties">
       <options>
         <option name="keyStoreUrl" value="file://" />
@@ -11,8 +11,8 @@
         </option>
       </options>
     </properties>
-    <root id="archive" name="My_AppInterview.app.apk">
-      <element id="android-final-package" facet="My_AppInterview.app/android/Android" />
+    <root id="archive" name="android_projBooks.app.apk">
+      <element id="android-final-package" facet="android_projBooks.app/android/Android" />
     </root>
   </artifact>
 </component>

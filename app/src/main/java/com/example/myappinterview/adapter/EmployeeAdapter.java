@@ -1,6 +1,5 @@
 package com.example.myappinterview.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -55,6 +54,18 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 	holder.imageButtonDelete.setOnClickListener(view -> {
 	  deleteFromDb(context, position, holder.telephoneEmployee.getText().toString());
 	  notifyItemRemoved(position);
+	});
+
+	holder.imageButtonEdit.setOnClickListener(view -> {
+	  Intent intent = new Intent(view.getContext(), DisplayEmployeeInformation.class);
+
+	  intent.putExtra("dataName", cursor.getString(1));
+	  intent.putExtra("dataTelephone", cursor.getString(2));
+	  intent.putExtra("dataAge", String.valueOf(cursor.getString(3)));
+	  intent.putExtra("dataSex", cursor.getString(4));
+
+	  cursor.close();
+	  view.getContext().startActivity(intent);
 	});
 
 	if (cursor.move(position + 1)) {
